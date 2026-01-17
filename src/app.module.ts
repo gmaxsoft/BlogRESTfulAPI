@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -8,17 +8,22 @@ import { TypeOrmModule } from '@nestjs/typeorm';
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
+      envFilePath: '.env',
     }),
-    TypeOrmModule.forRoot({
-      type: 'mysql', // 'postgres', 'sqlite', itp.
-      host: 'localhost',
-      port: 3306,
-      username: 'root',
-      password: 'password',
-      database: 'nestdb',
-      entities: [__dirname + '/../**/**/*entity{.ts,.js}'], // Automatyczne ładowanie encji
-      synchronize: true, // Używaj tylko w rozwoju! W produkcji migracje!
-      autoLoadEntities: true,
+    TypeOrmModule.forRootAsync({
+      imports: [ConfigModule],
+      useFactory: (configService: ConfigService) => ({
+        type: 'mysql',
+        host: configService.get<string>('DB_HOST', 'localhost'),
+        port: configService.get<number>('DB_PORT', 3306),
+        username: configService.get<string>('DB_USERNAME', 'root'),
+        password: configService.get<string>('DB_PASSWORD'),
+        database: configService.get<string>('DB_DATABASE', 'nestdb'),
+        entities: [__dirname + '/../**/**/*.entity{.ts,.js}'],
+        synchronize: configService.get<string>('NODE_ENV') === 'development',
+        autoLoadEntities: true,
+      }),
+      inject: [ConfigService],
     }),
   ],
   controllers: [AppController],
