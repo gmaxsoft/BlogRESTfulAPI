@@ -31,6 +31,7 @@ A modern, scalable RESTful API for blog management built with NestJS. This appli
 - **ESLint** - Linting utility for JavaScript and TypeScript
 - **Prettier** - Code formatter
 - **GitHub Actions** - CI/CD pipeline for automated testing and building
+- **Swagger/OpenAPI** - API documentation and interactive testing
 
 ### Additional Libraries
 - **RxJS** - Reactive programming library
@@ -119,6 +120,26 @@ This will create:
 - Up to 10 users
 - Up to 50 posts
 - Up to 40 comments
+
+## 📚 API Documentation (Swagger)
+
+The API documentation is available via Swagger UI when the application is running:
+
+**Swagger UI**: `http://localhost:3000/api`
+
+The Swagger documentation includes:
+- Interactive API explorer
+- Request/response schemas
+- Authentication support (JWT Bearer token)
+- Try-it-out functionality for all endpoints
+
+To access protected endpoints:
+1. First, register or login via `/auth/register` or `/auth/login`
+2. Copy the JWT token from the response
+3. Click the "Authorize" button in Swagger UI
+4. Enter: `Bearer <your-token>` (or just `<your-token>`)
+5. Click "Authorize" and "Close"
+6. Now you can test protected endpoints
 
 ## 🧪 Testing
 

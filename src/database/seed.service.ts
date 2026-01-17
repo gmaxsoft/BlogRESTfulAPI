@@ -19,18 +19,9 @@ export class SeedService {
 
   async seed() {
     // Clear existing data (in correct order due to foreign key constraints)
-    await this.commentRepository
-      .createQueryBuilder()
-      .delete()
-      .execute();
-    await this.postRepository
-      .createQueryBuilder()
-      .delete()
-      .execute();
-    await this.userRepository
-      .createQueryBuilder()
-      .delete()
-      .execute();
+    await this.commentRepository.createQueryBuilder().delete().execute();
+    await this.postRepository.createQueryBuilder().delete().execute();
+    await this.userRepository.createQueryBuilder().delete().execute();
 
     // Create users (max 10)
     const users = await this.createUsers(10);
@@ -148,7 +139,9 @@ export class SeedService {
       const randomUser = users[Math.floor(Math.random() * users.length)];
       const post = this.postRepository.create({
         title: titles[i],
-        content: contents[i % contents.length] + ` This is post number ${i + 1} with detailed content about ${titles[i]}.`,
+        content:
+          contents[i % contents.length] +
+          ` This is post number ${i + 1} with detailed content about ${titles[i]}.`,
         authorId: randomUser.id,
       });
       posts.push(await this.postRepository.save(post));
