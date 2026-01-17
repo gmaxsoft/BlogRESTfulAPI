@@ -18,10 +18,19 @@ export class SeedService {
   ) {}
 
   async seed() {
-    // Clear existing data
-    await this.commentRepository.clear();
-    await this.postRepository.clear();
-    await this.userRepository.clear();
+    // Clear existing data (in correct order due to foreign key constraints)
+    await this.commentRepository
+      .createQueryBuilder()
+      .delete()
+      .execute();
+    await this.postRepository
+      .createQueryBuilder()
+      .delete()
+      .execute();
+    await this.userRepository
+      .createQueryBuilder()
+      .delete()
+      .execute();
 
     // Create users (max 10)
     const users = await this.createUsers(10);
