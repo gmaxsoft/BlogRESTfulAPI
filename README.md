@@ -230,8 +230,8 @@ Workflow runs on:
 
 ## 📄 License
 
-This project is private and unlicensed.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## 👤 Author
 
-Created as part of a blog management system project.
+Maxsoft. Created as part of a blog management system project.

@@ -1,10 +1,10 @@
 {
   "name": "blogresfullapi",
-  "version": "0.0.1",
-  "description": "",
-  "author": "",
+  "version": "1.0.1",
+  "description": "Maxsoft. Created as part of a blog management system project.",
+  "author": "Maxsoft",
   "private": true,
-  "license": "UNLICENSED",
+  "license": "MIT",
   "scripts": {
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
