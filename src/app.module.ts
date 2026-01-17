@@ -8,6 +8,7 @@ import { UsersModule } from './users/users.module';
 import { PostsModule } from './posts/posts.module';
 import { CommentsModule } from './comments/comments.module';
 import { AuthModule } from './auth/auth.module';
+import { SeedModule } from './database/seed.module';
 import { LoggerMiddleware } from './common/middleware/logger.middleware';
 import { TransformInterceptor } from './common/interceptors/transform.interceptor';
 import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
@@ -40,6 +41,7 @@ import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
     PostsModule,
     CommentsModule,
     AuthModule,
+    SeedModule,
   ],
   controllers: [AppController],
   providers: [
