@@ -19,9 +19,9 @@ export class SeedService {
 
   async seed() {
     // Clear existing data
-    await this.commentRepository.delete({});
-    await this.postRepository.delete({});
-    await this.userRepository.delete({});
+    await this.commentRepository.clear();
+    await this.postRepository.clear();
+    await this.userRepository.clear();
 
     // Create users (max 10)
     const users = await this.createUsers(10);
