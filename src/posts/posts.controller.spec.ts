@@ -6,7 +6,6 @@ import { UpdatePostDto } from './dto/update-post.dto';
 
 describe('PostsController', () => {
   let controller: PostsController;
-  let service: PostsService;
 
   const mockPostsService = {
     findAll: jest.fn(),
@@ -28,7 +27,6 @@ describe('PostsController', () => {
     }).compile();
 
     controller = module.get<PostsController>(PostsController);
-    service = module.get<PostsService>(PostsService);
   });
 
   it('should be defined', () => {
@@ -41,7 +39,7 @@ describe('PostsController', () => {
       mockPostsService.findAll.mockReturnValue(result);
 
       expect(controller.findAll()).toEqual(result);
-      expect(service.findAll).toHaveBeenCalled();
+      expect(mockPostsService.findAll).toHaveBeenCalled();
     });
   });
 
@@ -51,7 +49,7 @@ describe('PostsController', () => {
       mockPostsService.findOne.mockReturnValue(result);
 
       expect(controller.findOne('1')).toEqual(result);
-      expect(service.findOne).toHaveBeenCalledWith(1);
+      expect(mockPostsService.findOne).toHaveBeenCalledWith(1);
     });
   });
 
@@ -69,7 +67,7 @@ describe('PostsController', () => {
       mockPostsService.create.mockReturnValue(result);
 
       expect(controller.create(createPostDto)).toEqual(result);
-      expect(service.create).toHaveBeenCalledWith(createPostDto);
+      expect(mockPostsService.create).toHaveBeenCalledWith(createPostDto);
     });
 
     it('should create a post without authorId', () => {
@@ -84,7 +82,7 @@ describe('PostsController', () => {
       mockPostsService.create.mockReturnValue(result);
 
       expect(controller.create(createPostDto)).toEqual(result);
-      expect(service.create).toHaveBeenCalledWith(createPostDto);
+      expect(mockPostsService.create).toHaveBeenCalledWith(createPostDto);
     });
   });
 
@@ -100,7 +98,7 @@ describe('PostsController', () => {
       mockPostsService.update.mockReturnValue(result);
 
       expect(controller.update('1', updatePostDto)).toEqual(result);
-      expect(service.update).toHaveBeenCalledWith(1, updatePostDto);
+      expect(mockPostsService.update).toHaveBeenCalledWith(1, updatePostDto);
     });
   });
 
@@ -110,7 +108,7 @@ describe('PostsController', () => {
       mockPostsService.remove.mockReturnValue(result);
 
       expect(controller.remove('1')).toEqual(result);
-      expect(service.remove).toHaveBeenCalledWith(1);
+      expect(mockPostsService.remove).toHaveBeenCalledWith(1);
     });
   });
 });

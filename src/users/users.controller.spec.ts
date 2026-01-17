@@ -6,7 +6,6 @@ import { UpdateUserDto } from './dto/update-user.dto';
 
 describe('UsersController', () => {
   let controller: UsersController;
-  let service: UsersService;
 
   const mockUsersService = {
     findAll: jest.fn(),
@@ -28,7 +27,6 @@ describe('UsersController', () => {
     }).compile();
 
     controller = module.get<UsersController>(UsersController);
-    service = module.get<UsersService>(UsersService);
   });
 
   it('should be defined', () => {
@@ -41,7 +39,7 @@ describe('UsersController', () => {
       mockUsersService.findAll.mockReturnValue(result);
 
       expect(controller.findAll()).toEqual(result);
-      expect(service.findAll).toHaveBeenCalled();
+      expect(mockUsersService.findAll).toHaveBeenCalled();
     });
   });
 
@@ -51,7 +49,7 @@ describe('UsersController', () => {
       mockUsersService.findOne.mockReturnValue(result);
 
       expect(controller.findOne('1')).toEqual(result);
-      expect(service.findOne).toHaveBeenCalledWith(1);
+      expect(mockUsersService.findOne).toHaveBeenCalledWith(1);
     });
   });
 
@@ -69,7 +67,7 @@ describe('UsersController', () => {
       mockUsersService.create.mockReturnValue(result);
 
       expect(controller.create(createUserDto)).toEqual(result);
-      expect(service.create).toHaveBeenCalledWith(createUserDto);
+      expect(mockUsersService.create).toHaveBeenCalledWith(createUserDto);
     });
   });
 
@@ -85,7 +83,7 @@ describe('UsersController', () => {
       mockUsersService.update.mockReturnValue(result);
 
       expect(controller.update('1', updateUserDto)).toEqual(result);
-      expect(service.update).toHaveBeenCalledWith(1, updateUserDto);
+      expect(mockUsersService.update).toHaveBeenCalledWith(1, updateUserDto);
     });
   });
 
@@ -95,7 +93,7 @@ describe('UsersController', () => {
       mockUsersService.remove.mockReturnValue(result);
 
       expect(controller.remove('1')).toEqual(result);
-      expect(service.remove).toHaveBeenCalledWith(1);
+      expect(mockUsersService.remove).toHaveBeenCalledWith(1);
     });
   });
 });
