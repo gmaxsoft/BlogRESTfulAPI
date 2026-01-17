@@ -75,6 +75,8 @@ DB_DATABASE=blog_db
 JWT_SECRET=your_jwt_secret_key
 JWT_EXPIRES_IN=1d
 CORS_ORIGIN=http://localhost:3000
+THROTTLE_TTL=60000
+THROTTLE_LIMIT=100
 ```
 
 ## 🐳 Docker Setup
@@ -228,6 +230,10 @@ src/
 - Request validation with DTOs
 - Global authentication guard (with public route decorator)
 - Request logging middleware
+- **API Rate Limiting** - Prevents abuse by limiting the number of requests per IP address
+  - Default: 100 requests per 60 seconds
+  - Returns `429 Too Many Requests` when limit is exceeded
+  - Configurable via environment variables (`THROTTLE_TTL` and `THROTTLE_LIMIT`)
 
 ## 🔄 CI/CD
 
