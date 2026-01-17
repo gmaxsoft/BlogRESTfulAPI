@@ -1,98 +1,237 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# RESTful API for Blog Management
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+A modern, scalable RESTful API for blog management built with NestJS. This application provides endpoints for managing users, posts, comments, and authentication with JWT.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## 🚀 Technologies
 
-## Description
+### Core Framework
+- **NestJS** - Progressive Node.js framework for building efficient and scalable server-side applications
+- **TypeScript** - Typed superset of JavaScript
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+### Database & ORM
+- **TypeORM** - Object-Relational Mapping library for TypeScript and JavaScript
+- **MySQL 8.0** - Relational database management system
+- **Docker** - Containerization platform for database deployment
 
-## Project setup
+### Authentication & Security
+- **Passport.js** - Authentication middleware for Node.js
+- **JWT (JSON Web Tokens)** - Token-based authentication
+- **bcryptjs** - Password hashing library
 
+### Validation & Transformation
+- **class-validator** - Decorator-based validation library
+- **class-transformer** - Transformation library for plain objects to class instances
+
+### Testing
+- **Jest** - JavaScript testing framework
+- **Supertest** - HTTP assertion library for end-to-end testing
+- **better-sqlite3** - In-memory SQLite database for testing
+
+### Development Tools
+- **ESLint** - Linting utility for JavaScript and TypeScript
+- **Prettier** - Code formatter
+- **GitHub Actions** - CI/CD pipeline for automated testing and building
+
+### Additional Libraries
+- **RxJS** - Reactive programming library
+- **reflect-metadata** - Metadata reflection API
+
+## 📋 Prerequisites
+
+- Node.js (20.x or 22.x)
+- npm or yarn
+- Docker and Docker Compose
+- MySQL 8.0 (via Docker)
+
+## 🔧 Installation
+
+1. Clone the repository:
 ```bash
-$ npm install
+git clone https://github.com/gmaxsoft/BlogRESTfulAPI.git
+cd BlogRESTfulAPI
 ```
 
-## Compile and run the project
-
+2. Install dependencies:
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+npm install
 ```
 
-## Run tests
-
+3. Create a `.env` file based on `.env.example`:
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+cp .env.example .env
 ```
 
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
-
-```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+4. Configure your environment variables in `.env`:
+```env
+PORT=3000
+NODE_ENV=development
+DB_TYPE=mysql
+DB_HOST=localhost
+DB_PORT=3306
+DB_USERNAME=root
+DB_PASSWORD=your_password
+DB_DATABASE=blog_db
+JWT_SECRET=your_jwt_secret_key
+JWT_EXPIRES_IN=1d
+CORS_ORIGIN=http://localhost:3000
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+## 🐳 Docker Setup
 
-## Resources
+Start the MySQL database using Docker Compose:
 
-Check out a few resources that may come in handy when working with NestJS:
+```bash
+docker-compose up -d
+```
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+This will:
+- Start MySQL 8.0 container
+- Create a persistent volume for database data
+- Expose MySQL on port 3306
 
-## Support
+To stop the database:
+```bash
+docker-compose down
+```
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+## 🏃 Running the Application
 
-## Stay in touch
+### Development Mode
+```bash
+npm run start:dev
+```
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+The application will be available at `http://localhost:3000`
 
-## License
+### Production Mode
+```bash
+npm run build
+npm run start:prod
+```
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+### Database Seeding
+To populate the database with sample data:
+```bash
+npm run seed
+```
+
+This will create:
+- Up to 10 users
+- Up to 50 posts
+- Up to 40 comments
+
+## 🧪 Testing
+
+### Unit Tests
+```bash
+npm run test
+```
+
+### Watch Mode
+```bash
+npm run test:watch
+```
+
+### Test Coverage
+```bash
+npm run test:cov
+```
+
+### End-to-End Tests
+```bash
+npm run test:e2e
+```
+
+## 📁 Project Structure
+
+```
+src/
+├── auth/              # Authentication module
+│   ├── dto/          # Data Transfer Objects
+│   ├── guards/       # JWT authentication guards
+│   ├── strategies/   # Passport JWT strategy
+│   └── *.spec.ts     # Unit tests
+├── users/            # Users module
+│   ├── dto/          # User DTOs
+│   ├── entities/     # User entity
+│   └── *.spec.ts     # Unit tests
+├── posts/            # Posts module
+│   ├── dto/          # Post DTOs
+│   ├── entities/     # Post entity
+│   └── *.spec.ts     # Unit tests
+├── comments/         # Comments module
+│   ├── dto/          # Comment DTOs
+│   ├── entities/     # Comment entity
+│   └── *.spec.ts     # Unit tests
+├── common/           # Shared utilities
+│   ├── decorators/   # Custom decorators (e.g., @Public)
+│   ├── interceptors/ # Response transformation interceptor
+│   └── middleware/   # Request logging middleware
+├── database/         # Database utilities
+│   └── seed.ts       # Database seeding script
+└── main.ts           # Application entry point
+```
+
+## 🔐 API Endpoints
+
+### Authentication
+- `POST /auth/register` - Register a new user
+- `POST /auth/login` - Login user and get JWT token
+
+### Users
+- `GET /users` - Get all users
+- `GET /users/:id` - Get user by ID
+- `POST /users` - Create a new user
+- `PUT /users/:id` - Update user
+- `DELETE /users/:id` - Delete user
+
+### Posts
+- `GET /posts` - Get all posts
+- `GET /posts/:id` - Get post by ID
+- `POST /posts` - Create a new post
+- `PUT /posts/:id` - Update post
+- `DELETE /posts/:id` - Delete post
+
+### Comments
+- `GET /comments` - Get all comments
+- `GET /comments/:id` - Get comment by ID
+- `POST /comments` - Create a new comment
+- `PUT /comments/:id` - Update comment
+- `DELETE /comments/:id` - Delete comment
+
+## 🛡️ Security Features
+
+- JWT-based authentication
+- Password hashing with bcryptjs
+- CORS configuration
+- Request validation with DTOs
+- Global authentication guard (with public route decorator)
+- Request logging middleware
+
+## 🔄 CI/CD
+
+The project uses GitHub Actions for continuous integration:
+- Automated linting
+- Unit tests execution
+- End-to-end tests
+- Build verification
+
+Workflow runs on:
+- Push to `main` and `develop` branches
+- Pull requests to `main` and `develop` branches
+
+## 📝 Code Quality
+
+- ESLint for code linting
+- Prettier for code formatting
+- TypeScript strict mode
+- Unit tests for all modules
+- E2E tests for API endpoints
+
+## 📄 License
+
+This project is private and unlicensed.
+
+## 👤 Author
+
+Created as part of a blog management system project.
