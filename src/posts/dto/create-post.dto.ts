@@ -1,4 +1,10 @@
-import { IsString, MinLength, MaxLength, IsOptional, IsInt } from 'class-validator';
+import {
+  IsString,
+  MinLength,
+  MaxLength,
+  IsOptional,
+  IsInt,
+} from 'class-validator';
 
 export class CreatePostDto {
   @IsString({ message: 'Title must be a string' })

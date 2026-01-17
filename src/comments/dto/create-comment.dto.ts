@@ -1,4 +1,10 @@
-import { IsString, MinLength, MaxLength, IsOptional, IsInt } from 'class-validator';
+import {
+  IsString,
+  MinLength,
+  MaxLength,
+  IsOptional,
+  IsInt,
+} from 'class-validator';
 
 export class CreateCommentDto {
   @IsString({ message: 'Content must be a string' })

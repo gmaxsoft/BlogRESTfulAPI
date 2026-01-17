@@ -15,12 +15,16 @@ import { JwtStrategy } from './strategies/jwt.strategy';
     PassportModule,
     JwtModule.registerAsync({
       imports: [ConfigModule],
-      useFactory: (configService: ConfigService) => ({
-        secret: configService.get<string>('JWT_SECRET') || 'your-secret-key',
-        signOptions: {
-          expiresIn: (configService.get<string>('JWT_EXPIRES_IN') || '1d') as any,
-        },
-      }),
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+      useFactory: ((configService: ConfigService) => {
+        const expiresIn = configService.get<string>('JWT_EXPIRES_IN') || '1d';
+        return {
+          secret: configService.get<string>('JWT_SECRET') || 'your-secret-key',
+          signOptions: {
+            expiresIn: expiresIn,
+          },
+        };
+      }) as any,
       inject: [ConfigService],
     }),
   ],
